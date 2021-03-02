@@ -24,8 +24,63 @@
      */
 
     // TODO Votre code ici, commencez par require un des objet de connexion que nous avons fait ensemble.
+    require "./Classes/DB.php";
 
+    $db = DB::getInstance();
 
+    $search = $db->prepare("SELECT MIN(age) AS minimum FROM user");
+
+    $state = $search->execute();
+
+    if($state) {
+        $min = $search->fetch();
+        echo "L'âge minimum est de " . $min['minimum'] . "<br>";
+    }
+
+    $search = $db->prepare("SELECT MAX(age) AS minimum FROM user");
+
+    $state = $search->execute();
+
+    if($state) {
+        $min = $search->fetch();
+        echo "L'âge maximum est de " . $min['minimum'] . "<br>";
+    }
+
+    $search = $db->prepare("SELECT COUNT(*) AS number FROM user");
+
+    $state = $search->execute();
+
+    if($state) {
+        $min = $search->fetch();
+        echo "Le nombre d'utilisateur est de " . $min['number'] . "<br>";
+    }
+
+    $search = $db->prepare("SELECT COUNT(*) AS number  FROM user WHERE numero >= 5");
+
+    $state = $search->execute();
+
+    if($state) {
+        $min = $search->fetch();
+        echo "Le nombre d'utilisateur ayant un numero de rue supérieur ou égal à 5 est de " . $min['number'] . "<br>";
+    }
+
+    $search = $db->prepare("SELECT AVG(age) AS number  FROM user");
+
+    $state = $search->execute();
+
+    if($state) {
+        $min = $search->fetch();
+        echo "La moyenne d'âge des utilisateurs est de " . $min['number'] . "<br>";
+    }
+
+    $search = $db->prepare("SELECT SUM(numero) AS number  FROM user");
+
+    $state = $search->execute();
+
+    if($state) {
+        $min = $search->fetch();
+        echo "La somme des numéros de rue des utilisateurs est de " . $min['number'] . "<br>";
+    }
     ?>
 </body>
 </html>
